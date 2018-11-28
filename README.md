@@ -11,5 +11,5 @@ F：数据处理及可视化
 数据可视化
 ![image](https://github.com/SCP-511/spider/blob/master/lianjia/lianjia_data.png)
 ![image](https://github.com/SCP-511/spider/blob/master/lianjia/%E5%8C%97%E4%BA%AC%E7%A7%9F%E6%88%BF%E5%9B%BE%E8%A1%A8.png)
-
+![image](https://github.com/SCP-511/spider/blob/master/lianjia/%E5%8C%97%E4%BA%AC%E7%A7%9F%E6%88%BF%E5%9B%BE%E8%A1%A8.png)
 
