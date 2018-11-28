@@ -105,7 +105,7 @@ class LianjiaDownloaderMiddleware(object):
     def spider_opened(self, spider):
         spider.logger.info('Spider opened: %s' % spider.name)
 
-
+#user-agent下载中间件
 class MyUserAgentMiddleware(UserAgentMiddleware):
     def __init__(self, user_agent):
         self.user_agent = user_agent
@@ -120,18 +120,3 @@ class MyUserAgentMiddleware(UserAgentMiddleware):
         agent = random.choice(self.user_agent)
         print(agent)
         request.headers['User-Agent'] = agent
-
-
-class ProxyMiddleware(object):
-
-    def __init__(self, iplist):
-        self.iplist = iplist
-
-    @classmethod
-    def from_crawler(cls, crawler):
-        return cls(iplist=crawler.settings.getlist('PROXIES'))
-
-    def process_request(self, request, spider):
-        ip = random.choice(self.iplist)
-        print(ip)
-        request.meta['proxy'] = ip

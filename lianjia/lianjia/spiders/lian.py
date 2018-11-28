@@ -3,10 +3,9 @@ import scrapy
 from lianjia.items import LianjiaItem
 import re
 from scrapy.http import Request
-import time
 from lxml import etree
 import json
-from urllib.parse import quote
+
 
 
 class LiSpider(scrapy.Spider):
@@ -38,12 +37,10 @@ class LiSpider(scrapy.Spider):
     def start_requests(self):
         for region in list(self.regions.keys()):
             url = 'https://bj.lianjia.com/zufang/' + region + '/rp1rp0/'
-            print(url)
             yield Request(url=url, callback=self.parse, meta={'region': region})
 
     # 返回每个小区
     def parse(self, response):
-        # print(response)
         xiaoqus = response.xpath('.//div[@class="option-list sub-option-list"]/a/@href').extract()
         if len(xiaoqus):
             xiaoqu_list = []
@@ -51,17 +48,14 @@ class LiSpider(scrapy.Spider):
                 xiaoqu = str(xiaoqu)
                 xiaoqu = xiaoqu.split('/')
                 xiaoqu_list.append(xiaoqu[2])
-            print('>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>', xiaoqu_list)
             for xiao_name in xiaoqu_list[1:]:
                 url = 'https://bj.lianjia.com/zufang/' + xiao_name + '/'
-                print('========================url:', url)
                 yield Request(url=url, meta={'xiao_name': xiao_name, 'region': response.meta['region']},
                               callback=self.parse_zufang)
 
     # 返回每个小区每页的连接
     def parse_zufang(self, response):
         xiao_names = response.meta['xiao_name']
-        print('--------', xiao_names)
 
         selector = etree.HTML(response.text)
         content = selector.xpath('//div[@class="page-box house-lst-page-box"]')
@@ -69,6 +63,7 @@ class LiSpider(scrapy.Spider):
         if (len(content)):
             page_data = json.loads(content[0].xpath('./@page-data')[0])
             total_pages = page_data.get("totalPage")
+        #防止网页链接产生重复
         for i in range(int(total_pages)):
             if xiao_names in self.region_list:
                 continue
