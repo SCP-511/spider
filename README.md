@@ -14,3 +14,4 @@ F：数据处理及可视化
 ![image](https://github.com/SCP-511/spider/blob/master/lianjia/各地区平均房屋大小对比.png)
 ![image](https://github.com/SCP-511/spider/blob/master/lianjia/%E5%90%84%E5%9C%B0%E5%8C%BA%E5%B9%B3%E5%9D%87%E7%A7%9F%E9%87%91%E5%AF%B9%E6%AF%94.png)
 ![image](https://github.com/SCP-511/spider/blob/master/lianjia/%E5%BB%BA%E9%80%A0%E5%B9%B4%E4%BB%BD%E7%BB%9F%E8%AE%A1.png)
+![image](https://github.com/SCP-511/spider/blob/master/lianjia/%E7%A7%9F%E9%87%91%E7%BB%9F%E8%AE%A1.png)
