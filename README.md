@@ -7,5 +7,5 @@ C：分析每个区域及其子区域的URL，每个房屋模块信息的具体�
 D：编写爬虫（scrapy框架，使用随机User-Agent或代理IP池)
 E：将数据存入MongoDB中
 F：数据处理及可视化
-
+![image]()
 
