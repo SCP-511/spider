@@ -5,6 +5,7 @@ import re
 from scrapy.http import Request
 from lxml import etree
 import json
+from selenium import webdriver
 
 
 
@@ -33,6 +34,14 @@ class LiSpider(scrapy.Spider):
     region_list = ['dongcheng', 'xicheng', 'chaoyang', 'haidian', 'fengtai', 'shijingshan', 'tongzhou', 'changping',
                    'daxing', 'yizhuangkaifaqu', 'shunyi', 'fangshan', 'mentougou', 'pinggu', 'huairou', 'miyun',
                    'yanqing']
+
+    def __init__(self):
+        self.browser = webdriver.Firefox()
+        self.browser.set_page_load_timeout(30)
+
+    def closed(self, spider):
+        print("spider closed")
+        self.browser.close()
 
     def start_requests(self):
         for region in list(self.regions.keys()):

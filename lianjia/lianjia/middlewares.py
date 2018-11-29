@@ -9,6 +9,9 @@ from scrapy import signals
 import scrapy
 import random
 from scrapy.downloadermiddlewares.useragent import UserAgentMiddleware
+from scrapy.http import HtmlResponse
+from selenium.common.exceptions import TimeoutException
+import time
 
 
 class LianjiaSpiderMiddleware(object):
@@ -120,3 +123,16 @@ class MyUserAgentMiddleware(UserAgentMiddleware):
         agent = random.choice(self.user_agent)
         print(agent)
         request.headers['User-Agent'] = agent
+
+class SeleniumMiddleware(object):
+    def process_request(self, request, spider):
+        if spider.name == 'lian':
+            try:
+                spider.browser.get(request.url)
+                spider.browser.execute_script('window.scrollTo(0, document.body.scrollHeight)')
+            except TimeoutException as e:
+                print('超时')
+                spider.browser.execute_script('window.stop()')
+            time.sleep(2)
+            return HtmlResponse(url=spider.browser.current_url, body=spider.browser.page_source,
+                                encoding="utf-8", request=request)
